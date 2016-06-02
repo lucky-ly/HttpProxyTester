@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+	<head>
+		<script src="Utils.js"></script>
+
+		<script>
+			"use strict";
+			var it = function (name, callback) {
+			    console.log('my name is ', name);
+			    console.log('starting callback');
+			    callback(function(){console.log('test is done!', arguments);});
+			    console.log('callback executed');
+			}
+
+			var jasmine = {
+			    createSpy: function() {
+			        return function(){console.log('I\'m a spy!!!')}
+			    }
+			}
+
+			var expect = function(anything) {
+			    console.log('expecting',anything);
+			    return {
+			        toEqual: function(eq) {
+			            console.log('to be equal to', eq);
+			        },
+			        not: {
+			            toHaveBeenCalled: function() { console.log('to not have been called'); }
+			        }
+			    };
+			}
+
+			var backend = {
+			    expectGET: function(url) {
+			        console.log('expecting get on',url);
+			        return {
+			            respond: function(code,data) {
+			                console.log('I\'ll respond with code',code);
+			                console.log('and data',data);
+			            }
+			        };
+			    },
+			    flush: function() {console.log('FLUSH!');}
+			};
+		</script>
+
+		<script>
+			"use strict";
+			var instance = new HttpProxyTester(backend,"http://localhost/",{test: function() {return new Promise(function(res,rej){res({status:512,data:"some data"});});}});
+		</script>
+	</head>
+	<body>
+
+	</body>
+</html>
