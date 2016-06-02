@@ -10,13 +10,13 @@
 			    console.log('starting callback');
 			    callback(function(){console.log('test is done!', arguments);});
 			    console.log('callback executed');
-			}
+			};
 
 			var jasmine = {
 			    createSpy: function() {
-			        return function(){console.log('I\'m a spy!!!')}
+			        return function(){console.log('I\'m a spy!!!');};
 			    }
-			}
+			};
 
 			var expect = function(anything) {
 			    console.log('expecting',anything);
@@ -28,7 +28,7 @@
 			            toHaveBeenCalled: function() { console.log('to not have been called'); }
 			        }
 			    };
-			}
+			};
 
 			var backend = {
 			    expectGET: function(url) {
